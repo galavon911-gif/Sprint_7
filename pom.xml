@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Sprint7</artifactId>
+    <artifactId>Sprint_7</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Archetype - Sprint7</name>
+    <name>Archetype - Sprint_7</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,7 +20,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Enforces strict version alignment for all JUnit 5 artifacts -->
+            <!-- Строгое выравнивание версий JUnit 5 -->
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -32,7 +32,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- JUnit 5 artifacts managed by the BOM -->
+        <!-- JUnit 5 (Управляется через BOM) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -57,7 +57,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Allure Integration -->
+        <!-- Интеграция Allure -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-rest-assured</artifactId>
@@ -78,14 +78,14 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Jackson Serializer -->
+        <!-- Сериализация Jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.16.0</version>
         </dependency>
 
-        <!-- Slf4j simple logging wrapper -->
+        <!-- Логгер для скрытия предупреждений SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -106,7 +106,7 @@
 
     <build>
         <plugins>
-            <!-- Настройка Surefire для интеграции Allure-шагов -->
+            <!-- Surefire runner config -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -121,14 +121,20 @@
                 </configuration>
             </plugin>
 
-            <!-- Настройка Allure плагина с фиксацией версии генератора -->
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.12.0</version>
-                <configuration>
-                    <reportVersion>${allure.version}</reportVersion>
-                    <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
+            <!-- Corrected Allure Plugin configuration -->
+                <plugin>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-maven</artifactId>
+                    <version>2.18.0</version> <!-- Самая свежая версия плагина для Java 11 -->
+                    <configuration>
+                        <reportVersion>2.25.0</reportVersion> <!-- Актуальная версия движка генератора отчетов -->
+                        <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
+
+
+                    <!-- Safe parameter injection for 2.12.0 version to bundle into 1 file -->
+                    <properties>
+                        <allure.single.file>true</allure.single.file>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>
